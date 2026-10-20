@@ -1,0 +1,12 @@
+{% extends 'miembros/base.html' %}
+{% block content %}
+<h2>Alta de Miembro</h2>
+<form method="POST">
+    {% csrf_token %}
+    <p><label>Nombre:</label><br><input type="text" name="nombre" required></p>
+    <p><label>Edad:</label><br><input type="number" name="edad" required></p>
+    <p><label>Plan:</label><br><input type="text" name="plan" placeholder="Ej: Mensual, Pase Libre" required></p>
+    <button type="submit" class="btn">Guardar</button>
+    <a href="{% url 'listar_miembros' %}">Cancelar</a>
+</form>
+{% endblock %}

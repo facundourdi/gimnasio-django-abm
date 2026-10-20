@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gimnasio ABM</title>
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+            Hola, <strong>{{ user.username }}</strong> |
+            <a href="{% url 'listar_miembros' %}">Inicio / Miembros</a> |
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" style="background:none; border:none; color:white; cursor:pointer; text-decoration:underline;">Cerrar Sesión</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Iniciar Sesión</a> |
+            <a href="{% url 'registro' %}">Registrarse</a>
+        {% endif %}
+    </nav>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% block content %}{% endblock %}
+</body>
+</html>

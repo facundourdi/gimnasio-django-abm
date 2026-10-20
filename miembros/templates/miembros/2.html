@@ -1,0 +1,31 @@
+{% extends 'miembros/base.html' %}
+{% block content %}
+<h2>Listado de Miembros</h2>
+<a href="{% url 'alta_miembro' %}" class="btn">+ Registrar Nuevo Miembro</a>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Edad</th>
+        <th>Plan</th>
+        <th>Acciones</th>
+    </tr>
+    {% for m in miembros %}
+    <tr>
+        <td>{{ m.id }}</td>
+        <td>{{ m.nombre }}</td>
+        <td>{{ m.edad }}</td>
+        <td>{{ m.plan }}</td>
+        <td>
+            <a href="{% url 'editar_miembro' m.id %}">Editar</a> | 
+            <a href="{% url 'baja_miembro' m.id %}">Eliminar</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">No hay miembros registrados todavía.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
